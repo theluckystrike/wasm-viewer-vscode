@@ -1,0 +1,126 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "WebAssembly Text",
+  "scopeName": "source.wat",
+  "comment": "WebAssembly text format (WAT and WAST). Written for WebAssembly Viewer by Zovo from the WebAssembly text format specification.",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#annotations"
+    },
+    {
+      "include": "#tokens"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-semicolon.wat",
+          "match": ";;.*$"
+        },
+        {
+          "include": "#blockComment"
+        }
+      ]
+    },
+    "blockComment": {
+      "name": "comment.block.wat",
+      "begin": "\\(;",
+      "end": ";\\)",
+      "patterns": [
+        {
+          "include": "#blockComment"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.wat",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.wat",
+          "match": "\\\\([tnr\"'\\\\]|[0-9a-fA-F]{2}|u\\{[0-9a-fA-F_]+\\})"
+        },
+        {
+          "name": "invalid.illegal.escape.wat",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "annotations": {
+      "match": "\\((@[^\\s()\";]+)",
+      "captures": {
+        "1": {
+          "name": "meta.annotation.wat storage.modifier.wat"
+        }
+      }
+    },
+    "tokens": {
+      "patterns": [
+        {
+          "name": "punctuation.section.parens.wat",
+          "match": "[()]"
+        },
+        {
+          "name": "variable.other.identifier.wat",
+          "match": "\\$[0-9A-Za-z!#$%&'*+\\-./:<=>?@\\\\^_`|~]+"
+        },
+        {
+          "name": "entity.other.attribute-name.memarg.wat",
+          "match": "\\b(offset|align)=(0x[0-9a-fA-F_]+|[0-9_]+)",
+          "captures": {
+            "1": {
+              "name": "entity.other.attribute-name.wat"
+            },
+            "2": {
+              "name": "constant.numeric.wat"
+            }
+          }
+        },
+        {
+          "name": "storage.type.wat",
+          "match": "\\b(i32|i64|f32|f64|v128|i8|i16|funcref|externref|anyref|eqref|i31ref|structref|arrayref|nullref|nullfuncref|nullexternref|exnref|nullexnref)\\b(?![.\\w])"
+        },
+        {
+          "name": "keyword.control.wat",
+          "match": "\\b(block|loop|if|else|end|br|br_if|br_table|br_on_null|br_on_non_null|br_on_cast|br_on_cast_fail|return|call|call_indirect|call_ref|return_call|return_call_indirect|return_call_ref|unreachable|nop|drop|select|try|try_table|catch|catch_ref|catch_all|catch_all_ref|throw|throw_ref|rethrow|delegate)\\b(?![.\\w])"
+        },
+        {
+          "name": "storage.modifier.wat",
+          "match": "\\b(module|func|param|result|local|type|import|export|memory|table|global|elem|data|start|tag|rec|sub|final|field|struct|array|item|offset|declare|mut|shared|then|ref|null|binary|quote|definition|instance|register|invoke|get|assert_return|assert_trap|assert_exhaustion|assert_malformed|assert_invalid|assert_unlinkable|assert_exception|either)\\b(?![.\\w])"
+        },
+        {
+          "name": "support.type.heap.wat",
+          "match": "\\b(func|extern|any|eq|i31|struct|array|none|noextern|nofunc|exn|noexn)\\b(?![.\\w])"
+        },
+        {
+          "name": "keyword.operator.instruction.wat",
+          "match": "\\b(i8x16|i16x8|i32x4|i64x2|f32x4|f64x2|v128|i32|i64|f32|f64|local|global|table|memory|elem|data|ref|struct|array|any|extern|i31)\\.[a-z0-9_.]+\\b"
+        },
+        {
+          "name": "constant.numeric.float.wat",
+          "match": "(?<![\\w$])[+-]?(inf|nan(:0x[0-9a-fA-F_]+)?)\\b"
+        },
+        {
+          "name": "constant.numeric.hex.wat",
+          "match": "(?<![\\w$])[+-]?0x[0-9a-fA-F_]+(\\.[0-9a-fA-F_]*)?([pP][+-]?[0-9_]+)?\\b"
+        },
+        {
+          "name": "constant.numeric.wat",
+          "match": "(?<![\\w$])[+-]?[0-9][0-9_]*(\\.[0-9_]*)?([eE][+-]?[0-9_]+)?\\b"
+        },
+        {
+          "name": "keyword.other.instruction.wat",
+          "match": "\\b[a-z][a-z0-9_]*\\b"
+        }
+      ]
+    }
+  }
+}

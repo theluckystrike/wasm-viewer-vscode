@@ -1,0 +1,10 @@
+{
+ "listing": "wasm",
+ "id": "zovo.zovo-wasm-viewer",
+ "triesKey": "wasmViewer.proTrial",
+ "tools": [
+  { "id": "profile", "title": "Size profiler", "line": "Shows what makes a .wasm big: biggest functions and data, size by section, import module and crate, and the call chain that keeps a function in the build." },
+  { "id": "compare", "title": "Compare two builds", "line": "Compares two .wasm builds: functions added, removed, grown and shrunk, section sizes, imports and exports, with a Markdown size table for pull requests." },
+  { "id": "sourcemap", "title": "Source mapping", "line": "Reads DWARF line tables or a source map: the source file and line of each function, code size per source file, and source lines next to the WAT." }
+ ]
+}

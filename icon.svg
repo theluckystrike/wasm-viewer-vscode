@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect x="8" y="8" width="240" height="240" rx="44" fill="#1E2A3A"/>
+  <rect x="36" y="40" width="184" height="160" rx="14" fill="#F4F6F9"/>
+  <rect x="36" y="40" width="184" height="28" rx="14" fill="#D7DEE8"/>
+  <rect x="36" y="54" width="184" height="14" fill="#D7DEE8"/>
+  <circle cx="54" cy="54" r="5" fill="#8A97A8"/>
+  <path d="M52 84 L62 90 L52 96 Z" fill="#6A4FD8"/>
+  <rect x="70" y="85" width="40" height="10" rx="5" fill="#6A4FD8"/>
+  <rect x="118" y="85" width="64" height="10" rx="5" fill="#2B3A4F"/>
+  <path d="M72 106 v68" stroke="#C3CCD8" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <rect x="84" y="108" width="60" height="9" rx="4.5" fill="#2E9E6A"/>
+  <rect x="152" y="108" width="22" height="9" rx="4.5" fill="#E07A2E"/>
+  <rect x="84" y="126" width="48" height="9" rx="4.5" fill="#2E9E6A"/>
+  <rect x="140" y="126" width="40" height="9" rx="4.5" fill="#3B6FD8"/>
+  <rect x="84" y="144" width="70" height="9" rx="4.5" fill="#2B3A4F"/>
+  <rect x="84" y="162" width="40" height="9" rx="4.5" fill="#2E9E6A"/>
+  <path d="M52 182 L58 188 L64 182" stroke="#8A97A8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="70" y="181" width="56" height="9" rx="4.5" fill="#9AA7B8"/>
+  <text x="128" y="234" font-family="Menlo, monospace" font-size="24" font-weight="700" fill="#F4F6F9" text-anchor="middle">.wasm</text>
+</svg>

@@ -1,0 +1,403 @@
+{
+  "name": "zovo-wasm-viewer",
+  "displayName": "WebAssembly Viewer (WASM, WAT)",
+  "description": "WebAssembly viewer for .wasm files: readable WAT text with folding per function, a module overview of sections, imports, exports and sizes, and WAT to WASM and WASM to WAT conversion with errors and line numbers. Offline, no toolchain to install.",
+  "version": "0.1.0",
+  "publisher": "zovo",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1E2A3A",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/wasm-viewer-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/theluckystrike/wasm-viewer-vscode/issues"
+  },
+  "homepage": "https://github.com/theluckystrike/wasm-viewer-vscode#readme",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Visualization",
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "webassembly",
+    "wasm",
+    "wat",
+    "wasm viewer",
+    "disassembler"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onLanguage:wat"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "Compare with the git HEAD build needs a trusted folder. Viewing, converting and the other tools work everywhere."
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "wasmViewer.editor",
+        "displayName": "WebAssembly Viewer",
+        "selector": [
+          {
+            "filenamePattern": "*.wasm"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "languages": [
+      {
+        "id": "wat",
+        "aliases": [
+          "WebAssembly Text",
+          "WAT"
+        ],
+        "extensions": [
+          ".wat",
+          ".wast"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "wat",
+        "scopeName": "source.wat",
+        "path": "./syntaxes/wat.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "wasmViewer.openAsText",
+        "title": "Open as WAT Text",
+        "category": "WebAssembly",
+        "icon": "$(file-code)"
+      },
+      {
+        "command": "wasmViewer.saveAsWat",
+        "title": "Save as WAT...",
+        "category": "WebAssembly",
+        "icon": "$(save-as)"
+      },
+      {
+        "command": "wasmViewer.compileWat",
+        "title": "Compile WAT to WASM",
+        "category": "WebAssembly",
+        "icon": "$(file-binary)"
+      },
+      {
+        "command": "wasmViewer.openWithViewer",
+        "title": "Open in WebAssembly Viewer",
+        "category": "WebAssembly",
+        "icon": "$(preview)"
+      },
+      {
+        "command": "wasmViewer.find",
+        "title": "Find in All Code",
+        "category": "WebAssembly"
+      },
+      {
+        "command": "wasmViewer.openSample",
+        "title": "Open the Sample Module",
+        "category": "WebAssembly"
+      },
+      {
+        "command": "wasmViewer.openWatSample",
+        "title": "Open the Sample WAT File",
+        "category": "WebAssembly"
+      },
+      {
+        "command": "wasmViewer.openWalkthrough",
+        "title": "Get Started",
+        "category": "WebAssembly"
+      },
+      {
+        "command": "wasmViewer.moreViewers",
+        "title": "More free tools by Zovo",
+        "category": "WebAssembly"
+      },
+      {
+        "command": "wasmViewer.supportDeveloper",
+        "title": "Support the developer",
+        "category": "WebAssembly"
+      },
+      {
+        "command": "wasmViewer.profile",
+        "title": "Size Profiler (Pro)",
+        "category": "WebAssembly"
+      },
+      {
+        "command": "wasmViewer.compare",
+        "title": "Compare Two Builds (Pro)",
+        "category": "WebAssembly"
+      },
+      {
+        "command": "wasmViewer.sourceMap",
+        "title": "Source Mapping (Pro)",
+        "category": "WebAssembly"
+      },
+      {
+        "command": "wasmViewer.zovoPro.profile",
+        "title": "Zovo Pro: Size profiler"
+      },
+      {
+        "command": "wasmViewer.zovoPro.compare",
+        "title": "Zovo Pro: Compare two builds"
+      },
+      {
+        "command": "wasmViewer.zovoPro.sourcemap",
+        "title": "Zovo Pro: Source mapping"
+      },
+      {
+        "command": "wasmViewer.getPro",
+        "title": "Get Zovo Pro (USD 19 once, all 22 Zovo extensions)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "wasmViewer.payWithPayPal",
+        "title": "Pay for Zovo Pro with PayPal (USD 19, team of 5 USD 59)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "wasmViewer.unlockWithSponsors",
+        "title": "I already paid: unlock with GitHub Sponsors",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "wasmViewer.enterLicenseKey",
+        "title": "Enter Zovo Pro license key",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "wasmViewer.removeLicense",
+        "title": "Remove Zovo Pro from this editor",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "wasmViewer.payByCard",
+        "title": "Pay for Zovo Pro by card (USD 19)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "wasmViewer.enterKey",
+        "title": "Enter a key",
+        "category": "Zovo Pro"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "wasmViewer.find",
+        "key": "ctrl+f",
+        "mac": "cmd+f",
+        "when": "activeCustomEditorId == 'wasmViewer.editor'"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "wasmViewer.compileWat",
+          "when": "resourceLangId == wat && resourceScheme != wasm-wat",
+          "group": "navigation@1"
+        },
+        {
+          "command": "wasmViewer.openAsText",
+          "when": "activeCustomEditorId == 'wasmViewer.editor'",
+          "group": "navigation@1"
+        },
+        {
+          "command": "wasmViewer.saveAsWat",
+          "when": "activeCustomEditorId == 'wasmViewer.editor'",
+          "group": "1_wasm@1"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "wasmViewer.compileWat",
+          "when": "resourceExtname =~ /^\\.(wat|wast)$/i && !explorerResourceIsFolder",
+          "group": "7_wasm@1"
+        },
+        {
+          "command": "wasmViewer.saveAsWat",
+          "when": "resourceExtname == .wasm && !explorerResourceIsFolder",
+          "group": "7_wasm@1"
+        },
+        {
+          "command": "wasmViewer.openAsText",
+          "when": "resourceExtname == .wasm && !explorerResourceIsFolder",
+          "group": "7_wasm@2"
+        },
+        {
+          "command": "wasmViewer.zovoPro.profile",
+          "when": "resourceExtname == .wasm && !explorerResourceIsFolder && config.wasmViewer.showProTools",
+          "group": "zovoPro@1"
+        },
+        {
+          "command": "wasmViewer.zovoPro.compare",
+          "when": "resourceExtname == .wasm && !explorerResourceIsFolder && config.wasmViewer.showProTools",
+          "group": "zovoPro@2"
+        },
+        {
+          "command": "wasmViewer.zovoPro.sourcemap",
+          "when": "resourceExtname == .wasm && !explorerResourceIsFolder && config.wasmViewer.showProTools",
+          "group": "zovoPro@3"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "wasmViewer.find",
+          "when": "activeCustomEditorId == 'wasmViewer.editor'"
+        },
+        {
+          "command": "wasmViewer.profile",
+          "when": "config.wasmViewer.showProTools"
+        },
+        {
+          "command": "wasmViewer.compare",
+          "when": "config.wasmViewer.showProTools"
+        },
+        {
+          "command": "wasmViewer.sourceMap",
+          "when": "config.wasmViewer.showProTools"
+        },
+        {
+          "command": "wasmViewer.zovoPro.profile",
+          "when": "false"
+        },
+        {
+          "command": "wasmViewer.zovoPro.compare",
+          "when": "false"
+        },
+        {
+          "command": "wasmViewer.zovoPro.sourcemap",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "WebAssembly Viewer",
+      "properties": {
+        "wasmViewer.useNames": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use the names from the name section ($main, $memcpy) in the WAT text. Off: indices only, like (func (;12;))."
+        },
+        "wasmViewer.openFunctionsBelowKB": {
+          "type": "number",
+          "default": 1536,
+          "minimum": 0,
+          "description": "Modules up to this size (KB) open with every function unfolded. Larger modules open with each function folded to its header line and print a function when you open it."
+        },
+        "wasmViewer.showOffsets": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show the byte offset of each instruction in the file, left of the WAT text."
+        },
+        "wasmViewer.maxFileSizeMB": {
+          "type": "number",
+          "default": 512,
+          "minimum": 1,
+          "description": "Files larger than this open with a message instead of the viewer."
+        },
+        "wasmViewer.openAsTextMaxMB": {
+          "type": "number",
+          "default": 16,
+          "minimum": 1,
+          "description": "Open as WAT Text asks first for .wasm files larger than this, because their text is many times larger. Save as WAT works for any size."
+        },
+        "wasmViewer.checkWat": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check .wat files while you type and show errors with their line and column in the Problems view."
+        },
+        "wasmViewer.openAfterCompile": {
+          "type": "boolean",
+          "default": true,
+          "description": "After Compile WAT to WASM, open the new .wasm in the viewer beside the text."
+        },
+        "wasmViewer.showProTools": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Zovo Pro tools (size profiler, compare two builds, source mapping) in the Command Palette, the Explorer menu and the viewer toolbar. Everything free stays visible."
+        },
+        "wasmViewer.askForRating": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask once for a Marketplace rating after modules opened without an error on two occasions at least 30 minutes apart. \"Later\" asks one more time after 7 days, \"No thanks\" never asks again. Nothing is sent anywhere."
+        },
+        "wasmViewer.showSupportLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small Rate, More free tools and Zovo Pro links at the bottom of the viewer. Nothing is sent anywhere."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "wasmViewer.start",
+        "title": "Get started with WebAssembly Viewer",
+        "description": "Read .wasm files as WAT text and convert between WAT and WASM, right in VS Code.",
+        "steps": [
+          {
+            "id": "open",
+            "title": "Open a .wasm file",
+            "description": "Click any .wasm file. It opens as WAT text with one fold per function; click a call or an export to jump to its function.\n[Open the sample module](command:wasmViewer.openSample)",
+            "media": {
+              "image": "images/screenshot.png",
+              "altText": "A WebAssembly module open as WAT text in VS Code, with folded functions and highlighted instructions."
+            },
+            "completionEvents": [
+              "onCommand:wasmViewer.openSample"
+            ]
+          },
+          {
+            "id": "overview",
+            "title": "See what is inside",
+            "description": "The Overview tab lists the sections with their sizes, the imports and exports, memories, tables, globals, custom sections and the name section. Click an export to go to its function.",
+            "media": {
+              "markdown": "walkthrough/overview.md"
+            }
+          },
+          {
+            "id": "convert",
+            "title": "WAT to WASM and back",
+            "description": "In a .wat file, errors show with their line and column while you type, and Compile WAT to WASM writes the .wasm next to it. In the viewer, Save as WAT writes the text.\n[Open the sample WAT file](command:wasmViewer.openWatSample)",
+            "media": {
+              "markdown": "walkthrough/convert.md"
+            },
+            "completionEvents": [
+              "onCommand:wasmViewer.openWatSample"
+            ]
+          },
+          {
+            "id": "zovo-related",
+            "title": "Files that often come with WebAssembly modules",
+            "description": "If your project also has binary files or linker map files, these free Zovo extensions work with them. A link opens the extension page, and you choose there whether to install it.\n[Hex Viewer](command:extension.open?%5B%22zovo.zovo-hex-viewer%22%5D)\n[Linker Map Viewer](command:extension.open?%5B%22zovo.zovo-linker-map-viewer%22%5D)",
+            "media": {
+              "markdown": "walkthrough/related.md"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "test": "node scripts/test.js",
+    "package": "npx -y @vscode/vsce@3 package --no-dependencies"
+  },
+  "devDependencies": {},
+  "sponsor": {
+    "url": "https://github.com/sponsors/theluckystrike/sponsorships?tier_id=679878"
+  }
+}

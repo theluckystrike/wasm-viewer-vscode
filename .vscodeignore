@@ -1,0 +1,11 @@
+test/**
+scripts/**
+.github/**
+.git/**
+.gitignore
+*.vsix
+icon.svg
+**/*.bak*
+node_modules/**
+dist/**
+images/raw/**
